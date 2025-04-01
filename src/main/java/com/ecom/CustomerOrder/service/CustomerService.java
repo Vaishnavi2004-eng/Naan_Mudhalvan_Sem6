@@ -34,4 +34,16 @@ public class CustomerService {
         repository.deleteById(id);
     }
 
+    public Customer updateCustomer(Long id, Customer updatedCustomer) {
+        Customer existingCustomer = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Customer not found with id: " + id));
+
+        existingCustomer.setName(updatedCustomer.getName());
+        existingCustomer.setEmail(updatedCustomer.getEmail());
+
+        return repository.save(existingCustomer);
+    }
+
+
+
 }

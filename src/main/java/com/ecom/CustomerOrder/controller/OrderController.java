@@ -14,11 +14,6 @@ import java.util.List;
 public class OrderController {
     @Autowired
     private OrderService service;
-    @PostMapping
-    public Order addOrder(@RequestBody Order order)
-    {
-        return service.addOrder(order);
-    }
     @GetMapping
     public List<Order> getAllOrder()
     {
@@ -35,4 +30,10 @@ public class OrderController {
     {
         service.deleteOrder(id);
     }
+    @PostMapping("/bulk")
+    public List<Order> addOrders(@RequestBody List<Order> orders) {
+        System.out.println("Received orders: " + orders);
+        return service.addOrders(orders);
+    }
+
 }

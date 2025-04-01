@@ -1,11 +1,12 @@
 package com.ecom.CustomerOrder.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Getter
@@ -14,16 +15,30 @@ import lombok.Setter;
 @AllArgsConstructor
 @Table(name = "customer_order")
 public class Order {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long Id;
-    private String ProductName;
-    private int Quantity;
-    private double price;
+    private Long id;
 
+    private String productName;
+    private int quantity;
+    private double price;
     @ManyToOne
-    @JoinColumn(name = "customer_id",nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     @JsonBackReference
     private com.ecom.CustomerOrder.model.Customer customer;
 
+    public Long getId() {
+        return id;
+    }
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                ", customerId=" + (customer != null ? customer.getId() : "NULL") +
+                '}';
+    }
 }

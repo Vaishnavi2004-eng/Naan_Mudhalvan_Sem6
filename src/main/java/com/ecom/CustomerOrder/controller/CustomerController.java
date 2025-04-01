@@ -20,6 +20,10 @@ public class CustomerController {
     {
         return service.addCustomer(customer);
     }
+//    @GetMapping
+//    public String ret(){
+//        return "sample";
+//    }
     @GetMapping
     public List<Customer> getAllCustomer()
     {
@@ -36,4 +40,10 @@ public class CustomerController {
     {
         service.deleteCustomer(id);
     }
+    @PutMapping("/{id}")
+    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer
+            updatedCustomer) {
+        return service.updateCustomer(id, updatedCustomer);
+    }
+
 }
